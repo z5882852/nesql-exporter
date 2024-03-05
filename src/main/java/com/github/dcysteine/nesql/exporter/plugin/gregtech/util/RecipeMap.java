@@ -10,6 +10,7 @@ import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
 import cpw.mods.fml.common.registry.GameRegistry;
 import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
 import goodgenerator.loader.Loaders;
+import gregtech.api.GregTech_API;
 import gregtech.api.enums.ItemList;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
@@ -105,7 +106,7 @@ public enum RecipeMap {
     VAT(
             BartWorksRecipeMaps.bacterialVatRecipes,
             "bacterialVat",
-            GameRegistry.makeItemStack("gtegtech:gt.blockmachines",12712,1,""),
+            new ItemStack(GregTech_API.sBlockMachines, 1, 12712),
             true,
             new Dimension(3, 2),
             new Dimension(1, 1),

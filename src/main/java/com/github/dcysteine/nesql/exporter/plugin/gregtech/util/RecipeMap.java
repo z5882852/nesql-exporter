@@ -1,14 +1,126 @@
 package com.github.dcysteine.nesql.exporter.plugin.gregtech.util;
 
+import com.elisis.gtnhlanth.api.recipe.LanthanidesRecipeMaps;
+import com.elisis.gtnhlanth.common.register.LanthItemList;
+import com.github.bartimaeusnek.bartworks.API.recipe.BartWorksRecipeMaps;
+import com.github.bartimaeusnek.bartworks.common.loaders.ItemRegistry;
 import com.github.dcysteine.nesql.sql.base.recipe.Dimension;
+import com.gtnewhorizons.gtnhintergalactic.item.IGItems;
+import com.gtnewhorizons.gtnhintergalactic.recipe.IGRecipeMaps;
+import cpw.mods.fml.common.registry.GameRegistry;
+import goodgenerator.api.recipe.GoodGeneratorRecipeMaps;
+import goodgenerator.loader.Loaders;
 import gregtech.api.enums.ItemList;
 import gregtech.api.recipe.RecipeMapBackend;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GT_LanguageManager;
 import gregtech.api.util.GT_Recipe;
+import gtPlusPlus.api.recipe.GTPPRecipeMaps;
+import gtPlusPlus.xmod.gregtech.api.enums.GregtechItemList;
+import net.minecraft.item.ItemStack;
 
 /** Enum of supported GregTech recipe maps. */
 public enum RecipeMap {
+    //GG
+    PRECISE_ASSEMBLER(
+            GoodGeneratorRecipeMaps.preciseAssemblerRecipes,
+            "precoseassembler",
+            Loaders.PA,
+            true,
+            new Dimension(4,1),
+            new Dimension(4,1),
+            new Dimension(3,1),
+            new Dimension(0,0)),
+    COMPONENT_ASSEMBLYLINE(
+            GoodGeneratorRecipeMaps.componentAssemblyLineRecipes,
+            "componentassemblyline",
+            Loaders.CompAssline,
+            true,
+            new Dimension(3,4),
+            new Dimension(4,3),
+            new Dimension(1,1),
+            new Dimension(0,0)),
+    NEUTRON_ACTIVATOR(
+            GoodGeneratorRecipeMaps.neutronActivatorRecipes,
+            "neutronactivator",
+            Loaders.NA,
+            true,
+            new Dimension(3,3),
+            new Dimension(1,1),
+            new Dimension(3,3),
+            new Dimension(1,1)),
+    //Lanth
+    DIGESTER(
+            LanthanidesRecipeMaps.digesterRecipes,
+            "digester",
+            LanthItemList.DIGESTER,
+            true,
+            new Dimension(1,1),
+            new Dimension(1,1),
+            new Dimension(1,1),
+            new Dimension(1,1)),
+    DISSOLUATION(
+            LanthanidesRecipeMaps.dissolutionTankRecipes,
+            "dissolution",
+            LanthItemList.DISSOLUTION_TANK,
+            true,
+            new Dimension(1,1),
+            new Dimension(2,1),
+            new Dimension(3,1),
+            new Dimension(1,1)),
+    //GTPP
+    QFT(
+            GTPPRecipeMaps.quantumForceTransformerRecipes,
+            "quantumforcetransformer",
+            GregtechItemList.QuantumForceTransformer.get(1L),
+            true,
+            new Dimension(3,2),
+            new Dimension(3,2),
+            new Dimension(3,2),
+            new Dimension(3,2)),
+    /*TECTECH
+    EOH(
+    What? EOH do not use GT_Recipe! Lets add it later...
+    ), */
+    //GTNH-IG
+    SPACE_ASSEMBLER(
+            IGRecipeMaps.spaceAssemblerRecipes,
+            "spaceassembler",
+            IGItems.SpaceElevatorModuleAssemblerT1,
+            true,
+            new Dimension(4, 4),
+            new Dimension(4, 1),
+            new Dimension(1, 1),
+            new Dimension(0, 0)),
+    //BARTWORKS
+    CAL(
+            BartWorksRecipeMaps.circuitAssemblyLineRecipes,
+            "circuitassemblyline",
+            ItemRegistry.cal,
+            true,
+            new Dimension(4, 2),
+            new Dimension(1, 1),
+            new Dimension(1, 1),
+            new Dimension(0, 0)),
+    VAT(
+            BartWorksRecipeMaps.bacterialVatRecipes,
+            "bacterialVat",
+            GameRegistry.makeItemStack("gtegtech:gt.blockmachines",12712,1,""),
+            true,
+            new Dimension(3, 2),
+            new Dimension(1, 1),
+            new Dimension(2, 1),
+            new Dimension(1, 1)),
+    EIC(
+            BartWorksRecipeMaps.electricImplosionCompressorRecipes,
+            "electriccompress",
+            ItemRegistry.eic,
+            true,
+            new Dimension(3,2),
+            new Dimension(1,1),
+            new Dimension(2,1),
+            new Dimension(0,0)),
+    //GREGTECH
     ORE_WASHER(
             RecipeMaps.oreWasherRecipes,
             "orewasher",
@@ -614,7 +726,7 @@ public enum RecipeMap {
     /** Used for IDs. */
     private final String shortName;
     private final String name;
-    private final ItemList icon;
+    private final ItemStack icon;
     private final boolean shapeless;
     private final Dimension itemInputDimension;
     private final Dimension fluidInputDimension;
@@ -623,6 +735,20 @@ public enum RecipeMap {
 
     RecipeMap(
             gregtech.api.recipe.RecipeMap<? extends RecipeMapBackend> recipeMap, String shortName, ItemList icon, boolean shapeless,
+            Dimension itemInputDimension, Dimension fluidInputDimension,
+            Dimension itemOutputDimension, Dimension fluidOutputDimension) {
+        this.recipeMap = recipeMap;
+        this.shortName = shortName;
+        this.name = GT_LanguageManager.getTranslation(recipeMap.unlocalizedName);
+        this.icon = icon.get(1L);
+        this.shapeless = shapeless;
+        this.itemInputDimension = itemInputDimension;
+        this.fluidInputDimension = fluidInputDimension;
+        this.itemOutputDimension = itemOutputDimension;
+        this.fluidOutputDimension = fluidOutputDimension;
+    }
+    RecipeMap(
+            gregtech.api.recipe.RecipeMap<? extends RecipeMapBackend> recipeMap, String shortName, ItemStack icon, boolean shapeless,
             Dimension itemInputDimension, Dimension fluidInputDimension,
             Dimension itemOutputDimension, Dimension fluidOutputDimension) {
         this.recipeMap = recipeMap;
@@ -652,7 +778,7 @@ public enum RecipeMap {
         return String.format("%s (%s)", name, voltage.getName());
     }
 
-    public ItemList getIcon() {
+    public ItemStack getIcon() {
         return icon;
     }
 

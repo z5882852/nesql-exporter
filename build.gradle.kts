@@ -163,12 +163,28 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:ProjectRed:$projectRedVersion:dev") {
         isTransitive = false
     }
-
+    compileOnly("com.github.GTNewHorizons:bartworks:0.9.14:dev") {
+        isTransitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:GoodGenerator:0.8.12:dev") {
+        isTransitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:GTNH-Intergalactic:1.3.1:dev") {
+        isTransitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:GTplusplus:1.11.33:dev") {
+        isTransitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:GTNH-Lanthanides:0.12.11:dev") {
+        isTransitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:TecTech:5.3.32:dev") {
+        isTransitive = false
+    }
     val thaumcraftVersion: String by project
     implementation("thaumcraft:Thaumcraft:$minecraftVersion-$thaumcraftVersion:dev")
     val thaumcraftNeiVersion: String by project
     implementation("curse.maven:thaumcraft-nei-plugin-225095:$thaumcraftNeiVersion")
-
     val betterQuestingVersion: String by project
     implementation("com.github.GTNewHorizons:BetterQuesting:$betterQuestingVersion:dev") {
         isTransitive = false

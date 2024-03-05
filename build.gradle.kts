@@ -1,5 +1,8 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import net.minecraftforge.gradle.user.UserExtension
+import java.net.HttpURLConnection
+import java.net.URL
+import java.io.IOException
 
 buildscript {
     repositories {
@@ -36,7 +39,7 @@ java {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:4.0.0-rc-2"
+        artifact = "com.google.protobuf:protoc:3.17.3"
     }
 }
 
@@ -54,9 +57,9 @@ minecraft.version = "$minecraftVersion-$forgeVersion-$minecraftVersion"
 
 configure<UserExtension> {
     replacements.putAll(
-        mapOf(
-            Pair("@version@", project.version)
-        )
+            mapOf(
+                    Pair("@version@", project.version)
+            )
     )
     runDir = "run"
 }
@@ -88,6 +91,7 @@ repositories {
 
     maven("https://maven.ic2.player.to") {
         name = "IC2 Maven"
+        url = uri(getURL("https://maven.ic2.player.to", "https://maven2.ic2.player.to"))
         metadataSources {
             artifact()
         }
@@ -175,13 +179,30 @@ tasks.withType<Jar> {
     // Replace version in mcmod.info
     filesMatching("mcmod.info") {
         expand(
-            mapOf(
-                "version" to project.version,
-                "mcversion" to project.minecraft.version
-            )
+                mapOf(
+                        "version" to project.version,
+                        "mcversion" to project.minecraft.version
+                )
         )
     }
     archiveBaseName.set("NESQL-Exporter")
+}
+
+fun getURL(main: String, fallback: String): String {
+    return if (pingURL(main, 10000)) main else fallback
+}
+
+fun pingURL(url: String, timeout: Int): Boolean {
+    return try {
+        val connection = URL(url.replaceFirst("^https".toRegex(), "http")).openConnection() as HttpURLConnection
+        connection.connectTimeout = timeout
+        connection.readTimeout = timeout
+        connection.requestMethod = "HEAD"
+        val responseCode = connection.responseCode
+        responseCode in 200..399
+    } catch (e: IOException) {
+        false
+    }
 }
 
 // Unfortunately, we can neither minimize the shadow jar nor relocate it,
@@ -214,12 +235,12 @@ val depsJar by tasks.creating(ShadowJar::class) {
 
     // Remove mod code and other junk from jar.
     val excludeFun =
-        fun(fileTreeElement: FileTreeElement): Boolean {
-            val path = fileTreeElement.path
-            val keep = path.endsWith(".jar")
-            val remove = !path.contains("/") || path.startsWith("META-INF") || path.startsWith(project.group.toString())
-            return remove && !keep
-        }
+            fun(fileTreeElement: FileTreeElement): Boolean {
+                val path = fileTreeElement.path
+                val keep = path.endsWith(".jar")
+                val remove = !path.contains("/") || path.startsWith("META-INF") || path.startsWith(project.group.toString())
+                return remove && !keep
+            }
     exclude(excludeFun)
 
     archiveClassifier.set("deps")

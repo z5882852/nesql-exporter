@@ -52,8 +52,7 @@ public class GregTechRecipeFactory extends EntityFactory<GregTechRecipe, String>
 
         List<String> additionalInfo = new ArrayList<>();
         switch (recipeMap) {
-            case FUSION:
-            case COMPLEX_FUSION: {
+            case FUSION: {
                 // Special handling for fusion recipes.
                 int euToStart = gregTechRecipe.mSpecialValue;
 

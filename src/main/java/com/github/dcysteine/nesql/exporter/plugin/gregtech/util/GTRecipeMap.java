@@ -3,7 +3,7 @@ package com.github.dcysteine.nesql.exporter.plugin.gregtech.util;
 import com.github.dcysteine.nesql.sql.base.recipe.Dimension;
 import com.gtnewhorizons.modularui.api.math.Pos2d;
 import gregtech.api.recipe.RecipeMapBackend;
-import gregtech.api.util.GT_LanguageManager;
+import gregtech.api.util.GTLanguageManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -35,7 +35,7 @@ public class GTRecipeMap {
             Dimension itemOutputDimension, Dimension fluidOutputDimension) {
         this.recipeMap = recipeMap;
         this.shortName = shortName;
-        this.name = GT_LanguageManager.getTranslation(recipeMap.unlocalizedName);
+        this.name = GTLanguageManager.getTranslation(recipeMap.unlocalizedName);
         this.icon = icon;
         this.shapeless = shapeless;
         this.itemInputDimension = itemInputDimension;

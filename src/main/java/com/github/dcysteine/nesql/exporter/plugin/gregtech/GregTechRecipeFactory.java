@@ -12,9 +12,9 @@ import com.github.dcysteine.nesql.sql.base.recipe.Recipe;
 import com.github.dcysteine.nesql.sql.gregtech.GregTechRecipe;
 import com.google.common.base.Joiner;
 import cpw.mods.fml.common.ModContainer;
-import gregtech.api.enums.GT_Values;
+import gregtech.api.enums.GTValues;
 import gregtech.api.enums.HeatingCoilLevel;
-import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GTRecipe;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class GregTechRecipeFactory extends EntityFactory<GregTechRecipe, String>
     }
 
     public GregTechRecipe get(
-            Recipe recipe, GTRecipeMap GTRecipeMap, GT_Recipe gregTechRecipe,
+            Recipe recipe, GTRecipeMap GTRecipeMap, GTRecipe gregTechRecipe,
             Voltage voltageTier, int voltage, List<ItemStack> specialItems) {
         String id = IdPrefixUtil.GREG_TECH_RECIPE.applyPrefix(recipe.getId());
 
@@ -68,11 +68,11 @@ public class GregTechRecipeFactory extends EntityFactory<GregTechRecipe, String>
                 }
 
                 int vTier;
-                if (voltage <= GT_Values.V[6]) {
+                if (voltage <= GTValues.V[6]) {
                     vTier = 1;
-                } else if (voltage <= GT_Values.V[7]) {
+                } else if (voltage <= GTValues.V[7]) {
                     vTier = 2;
-                } else if (voltage <= GT_Values.V[8]) {
+                } else if (voltage <= GTValues.V[8]) {
                     vTier = 3;
                 } else {
                     vTier = 4;

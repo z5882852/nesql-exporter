@@ -104,6 +104,14 @@ repositories {
             includeGroup("thaumcraft")
         }
     }
+
+    maven("https://api.modrinth.com/maven") {
+        name = "Modrinth"
+    }
+
+    maven("https://jcenter.bintray.com") {
+        name = "JCenter"
+    }
 }
 
 dependencies {
@@ -163,25 +171,25 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:ProjectRed:$projectRedVersion:dev") {
         isTransitive = true
     }
-    compileOnly("com.github.GTNewHorizons:bartworks:0.9.14:dev") {
+//    compileOnly("com.github.GTNewHorizons:bartworks:0.9.14:dev") {
+//        isTransitive = true
+//    }
+//    compileOnly("com.github.GTNewHorizons:GoodGenerator:0.8.12:dev") {
+//        isTransitive = true
+//    }
+    compileOnly("com.github.GTNewHorizons:GTNH-Intergalactic:1.4.30") {
         isTransitive = true
     }
-    compileOnly("com.github.GTNewHorizons:GoodGenerator:0.8.12:dev") {
-        isTransitive = true
-    }
-    compileOnly("com.github.GTNewHorizons:GTNH-Intergalactic:1.3.1:dev") {
-        isTransitive = true
-    }
-    compileOnly("com.github.GTNewHorizons:GTplusplus:1.11.33:dev") {
-        isTransitive = true
-    }
-    compileOnly("com.github.GTNewHorizons:GTNH-Lanthanides:0.12.11:dev") {
-        isTransitive = true
-    }
-    compileOnly("com.github.GTNewHorizons:TecTech:5.3.32:dev") {
-        isTransitive = true
-    }
-    compileOnly("com.github.GTNewHorizons:ModularUI:1.1.39:dev") {
+//    compileOnly("com.github.GTNewHorizons:GTplusplus:1.11.33:dev") {
+//        isTransitive = true
+//    }
+//    compileOnly("com.github.GTNewHorizons:GTNH-Lanthanides:0.12.11:dev") {
+//        isTransitive = true
+//    }
+//    compileOnly("com.github.GTNewHorizons:TecTech:5.3.32:dev") {
+//        isTransitive = true
+//    }
+    compileOnly("com.github.GTNewHorizons:ModularUI:1.2.17") {
         isTransitive = true
     }
     val thaumcraftVersion: String by project

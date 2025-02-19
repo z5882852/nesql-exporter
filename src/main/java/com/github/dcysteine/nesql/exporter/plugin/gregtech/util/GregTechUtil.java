@@ -1,6 +1,6 @@
 package com.github.dcysteine.nesql.exporter.plugin.gregtech.util;
 
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTOreDictUnificator;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
@@ -11,12 +11,12 @@ public class GregTechUtil {
 
     /** Returns a list of item stacks that unify into the provided item stack. */
     public static List<ItemStack> reverseUnify(ItemStack itemStack) {
-        ItemStack unified = GT_OreDictUnificator.get(itemStack);
-        return GT_OreDictUnificator.getNonUnifiedStacks(unified);
+        ItemStack unified = GTOreDictUnificator.get(itemStack);
+        return GTOreDictUnificator.getNonUnifiedStacks(unified);
     }
 
     /** Returns a list of item stacks that unify into the provided object. */
     public static List<ItemStack> reverseUnify(Object object) {
-        return GT_OreDictUnificator.getNonUnifiedStacks(object);
+        return GTOreDictUnificator.getNonUnifiedStacks(object);
     }
 }

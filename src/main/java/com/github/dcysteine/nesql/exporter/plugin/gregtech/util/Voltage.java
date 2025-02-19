@@ -1,8 +1,8 @@
 package com.github.dcysteine.nesql.exporter.plugin.gregtech.util;
 
 import com.google.common.collect.ImmutableMap;
-import gregtech.api.enums.GT_Values;
-import gregtech.api.util.GT_Utility;
+import gregtech.api.enums.GTValues;
+import gregtech.api.util.GTUtility;
 
 import java.util.Arrays;
 import java.util.function.Function;
@@ -35,7 +35,7 @@ public enum Voltage {
 
     Voltage(int index) {
         this.index = index;
-        this.name = GT_Values.VN[index];
+        this.name = GTValues.VN[index];
     }
 
     private static final ImmutableMap<Integer, Voltage> VOLTAGE_MAP =
@@ -49,7 +49,7 @@ public enum Voltage {
     }
 
     public static Voltage convertVoltage(long voltage) {
-        return VOLTAGE_MAP.get((int) GT_Utility.getTier(voltage));
+        return VOLTAGE_MAP.get((int) GTUtility.getTier(voltage));
     }
 
     public int getIndex() {

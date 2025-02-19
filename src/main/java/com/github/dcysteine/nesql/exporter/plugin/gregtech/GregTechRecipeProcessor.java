@@ -10,7 +10,7 @@ import com.github.dcysteine.nesql.exporter.plugin.gregtech.util.GregTechUtil;
 import com.github.dcysteine.nesql.exporter.plugin.gregtech.util.Voltage;
 import com.github.dcysteine.nesql.sql.base.recipe.Recipe;
 import com.github.dcysteine.nesql.sql.base.recipe.RecipeType;
-import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GTRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -37,12 +37,12 @@ public class GregTechRecipeProcessor extends PluginHelper {
             logger.info("Processing recipe map: " + GTRecipeMap.getName());
             recipeMapCount++;
 
-            Collection<GT_Recipe> recipes = GTRecipeMap.getRecipeMap().getAllRecipes();
+            Collection<GTRecipe> recipes = GTRecipeMap.getRecipeMap().getAllRecipes();
             int total = recipes.size();
             logger.info("Processing {} GregTech recipes...", total);
 
             int count = 0;
-            for (GT_Recipe recipe : recipes) {
+            for (GTRecipe recipe : recipes) {
                 count++;
 
                 try {

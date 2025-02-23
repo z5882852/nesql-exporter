@@ -112,6 +112,8 @@ repositories {
     maven("https://jcenter.bintray.com") {
         name = "JCenter"
     }
+
+    mavenCentral()
 }
 
 dependencies {
@@ -138,6 +140,9 @@ dependencies {
 
     val hsqldbVersion: String by project
     shadowRuntime("org.hsqldb:hsqldb:$hsqldbVersion:jdk8")
+
+    val postgresqlVersion: String by project
+    shadowRuntime("org.postgresql:postgresql:$postgresqlVersion")
 
     val neiVersion: String by project
     implementation("com.github.GTNewHorizons:NotEnoughItems:$neiVersion:dev")

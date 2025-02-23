@@ -32,6 +32,32 @@ public final class ConfigOptions {
                             + "\nThe default repository name will be used.")
                     .register();
 
+    public static final Option<Boolean> USE_POSTGRESQL =
+            new BooleanOption(
+                    Category.OPTIONS, "use_postgresql", false,
+                    "If true, will connect to a local PostgreSQL server instead of using HSQLDB."
+                            + "\nWARNING: The PostgreSQL database will be deleted and overwritten!")
+                    .register();
+
+    public static final Option<Integer> POSTGRESQL_PORT =
+            new IntegerOption(
+                    Category.OPTIONS, "postgresql_port", 5432,
+                    "The port to use when trying to connect to PostgreSQL."
+                            + "\nHas no effect if use_postgresql is not true.")
+                    .register();
+
+    public static final Option<String> DATABASE_USER =
+            new StringOption(
+                    Category.OPTIONS, "database_user", "sa",
+                    "The username to use when creating or accessing the SQL database.")
+                    .register();
+
+    public static final Option<String> DATABASE_PASSWORD =
+            new StringOption(
+                    Category.OPTIONS, "database_password", "",
+                    "The password to use when creating or accessing the SQL database.")
+                    .register();
+
     public static final Option<Boolean> ENABLE_CONFIG_FILE =
             new BooleanOption(
                     Category.OPTIONS, "enable_config_file", false,
